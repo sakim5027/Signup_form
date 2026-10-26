@@ -207,7 +207,7 @@ class _SignupPageState extends State<SignupPage> {
                 // tip button
                 ElevatedButton(
                   onPressed: _getSignupTip,
-                  child: const Text('Local Demo Tips'),
+                  child: const Text('Local AI Demo Tips'),
                 ),
 
                 const SizedBox(height: 10),
@@ -215,7 +215,7 @@ class _SignupPageState extends State<SignupPage> {
                 // Display selected tip
                 if (_tipMessage.isNotEmpty)
                   Text(
-                    'Local demo tip: $_tipMessage',
+                    'Local AI demo tip: $_tipMessage',
                     textAlign: TextAlign.center,
                   ),
               ],
