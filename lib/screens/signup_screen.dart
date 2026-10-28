@@ -76,6 +76,8 @@ class _SignupPageState extends State<SignupPage> {
   }
 
   bool _obscurePassword = true;
+  DateTime? _birthDate;
+  final _dateController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -112,6 +114,34 @@ class _SignupPageState extends State<SignupPage> {
                       return 'Please enter your name';
                     }
                     return null;
+                  },
+                ),
+                const SizedBox(height: 16),
+
+                TextFormField(
+                  controller: _dateController,
+                  readOnly: true, // taps open the picker, not the keyboard
+                  decoration: const InputDecoration(
+                    labelText: 'Birth Date',
+                    prefixIcon: Icon(Icons.cake),
+                    border: OutlineInputBorder(),
+                  ),
+                  validator: (_) =>
+                      _birthDate == null ? 'Pick your birth date' : null,
+                  onTap: () async {
+                    final picked = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime(2008),
+                      firstDate: DateTime(1920),
+                      lastDate: DateTime.now(), // no future birthdays!
+                    );
+                    if (picked != null) {
+                      setState(() {
+                        _birthDate = picked;
+                        _dateController.text =
+                            '${picked.month}/${picked.day}/${picked.year}';
+                      });
+                    }
                   },
                 ),
                 const SizedBox(height: 16),
