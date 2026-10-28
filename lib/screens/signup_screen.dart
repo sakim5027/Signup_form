@@ -77,7 +77,8 @@ class _SignupPageState extends State<SignupPage> {
     }
   }
 
-  bool _obscurePassword = true;
+  bool _obscurePassword1 = true;
+  bool _obscurePassword2 = true;
   DateTime? _birthDate;
   final _dateController = TextEditingController();
   bool _submitting = false;
@@ -189,20 +190,20 @@ class _SignupPageState extends State<SignupPage> {
                 // 🔒 Password Field
                 TextFormField(
                   controller: _passwordController,
-                  obscureText: _obscurePassword,
+                  obscureText: _obscurePassword1,
                   decoration: InputDecoration(
                     labelText: 'Password',
                     prefixIcon: const Icon(Icons.lock),
                     border: const OutlineInputBorder(),
                     suffixIcon: IconButton(
                       icon: Icon(
-                        _obscurePassword
+                        _obscurePassword1
                             ? Icons.visibility
                             : Icons.visibility_off,
                       ),
                       onPressed: () {
                         setState(() {
-                          _obscurePassword = !_obscurePassword;
+                          _obscurePassword1 = !_obscurePassword1;
                         });
                       },
                     ),
@@ -213,20 +214,20 @@ class _SignupPageState extends State<SignupPage> {
                 // 🔒 Password Check Field
                 TextFormField(
                   controller: _passwordMatchController,
-                  obscureText: _obscurePassword,
+                  obscureText: _obscurePassword2,
                   decoration: InputDecoration(
                     labelText: 'Confirm Password',
                     prefixIcon: Icon(Icons.lock),
                     border: OutlineInputBorder(),
                     suffixIcon: IconButton(
                       icon: Icon(
-                        _obscurePassword
+                        _obscurePassword2
                             ? Icons.visibility
                             : Icons.visibility_off,
                       ),
                       onPressed: () {
                         setState(() {
-                          _obscurePassword = !_obscurePassword;
+                          _obscurePassword2 = !_obscurePassword2;
                         });
                       },
                     ),
