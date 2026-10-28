@@ -1,8 +1,6 @@
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 
-import 'welcome_screen.dart';
-
 class SuccessScreen extends StatefulWidget {
   const SuccessScreen({super.key, required this.userName});
 
@@ -49,13 +47,8 @@ class _SuccessScreenState extends State<SuccessScreen> {
                 const Text('Your haunted guest pass is confirmed.'),
                 const SizedBox(height: 24),
                 ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => WelcomeScreen()),
-                      (route) => false,
-                    );
-                  },
+                  onPressed: () =>
+                      Navigator.popUntil(context, (route) => route.isFirst),
                   child: const Text('Back to the Foyer'),
                 ),
               ],
