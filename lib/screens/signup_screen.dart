@@ -78,6 +78,24 @@ class _SignupPageState extends State<SignupPage> {
   bool _obscurePassword = true;
   DateTime? _birthDate;
   final _dateController = TextEditingController();
+  bool _submitting = false;
+
+  Future<void> _submit() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    setState(() => _submitting = true); // potion starts brewing
+
+    await Future.delayed(const Duration(seconds: 2));
+
+    if (!mounted) return; // user may have left the screen
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (_) => SuccessScreen(userName: _nameController.text.trim()),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -216,26 +234,20 @@ class _SignupPageState extends State<SignupPage> {
 
                 // 🚀 Sign Up Button
                 ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text(
-                            'Demo signup complete — your form passed validation!',
+                  onPressed: _submitting ? null : _submit, // null = disabled
+                  child: _submitting
+                      ? const SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            color: Colors.white,
                           ),
-                          backgroundColor: Colors.green,
+                        )
+                      : const Text(
+                          'Join the Mansion',
+                          style: TextStyle(fontSize: 18),
                         ),
-                      );
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.purple,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 40,
-                      vertical: 12,
-                    ),
-                  ),
-                  child: const Text('Sign Up', style: TextStyle(fontSize: 18)),
                 ),
                 const SizedBox(height: 20),
 
