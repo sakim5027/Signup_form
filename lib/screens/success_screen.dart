@@ -56,7 +56,10 @@ class _SuccessScreenState extends State<SuccessScreen> {
           ),
           Align(
             alignment: Alignment.topCenter,
-            child: ConfettiWidget(confettiController: _confetti),
+            child: IgnorePointer(
+              // decorative layers never need input
+              child: ConfettiWidget(confettiController: _confetti),
+            ),
           ),
         ],
       ),
